@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>New Room</title>
+</head>
+<body>
+    <h1>Conference Room Assigment System HMI</h1>
+    <h3>You can just call me CRASH!</h3>
+    <form action="" method="POST">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <input type="submit" value="Submit">
+    </form>
+    <h2>Navigation menu</h2>
+    <p><a href="/main">Main menu</a></p>
+</body>
+</html>
