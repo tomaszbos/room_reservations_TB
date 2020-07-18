@@ -20,5 +20,5 @@ from room_reservations_TB import views
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('main/', views.main_page),
-    path('new_room/', views.NewRoom.as_view(), name='new_room'),
+    path('room/new/', views.NewRoom.as_view(), name='new_room'),
 ]
