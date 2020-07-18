@@ -21,4 +21,5 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('main/', views.main_page),
     path('room/new/', views.NewRoom.as_view(), name='new_room'),
+    path('room/', views.AllRooms.as_view(), name='all_rooms'),
 ]

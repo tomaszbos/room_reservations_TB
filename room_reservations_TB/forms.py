@@ -13,6 +13,6 @@ class NewRoomForm(forms.Form):
         initial=0,
     )
     room_projector = forms.BooleanField(
-        required=True,
+        required=False,
         label='Conference Room Projector Available',
     )
