@@ -69,7 +69,7 @@ TEMPLATES = [
     },
 ]
 
-WSGI_APPLICATION = 'room_reservations_TB.wsgi.application'
+# WSGI_APPLICATION = 'room_reservations_TB.wsgi.application'
 
 
 # Database
