@@ -102,12 +102,19 @@ class RoomReservation(View):
         context = {"room_id": room.pk, "reservation_date": datetime.now(), 'room': room}
         return render(request, 'reserve_room.html', {'form': self.form(context)})
 
-    def post(self, request, room_id):
+    def post(self, request, room_id):  # TODO: clarify room_id being sent by post method
         data = request.POST
         form = self.form(data)
         text = 'Wrong input!'
         if form.is_valid():
             reservation_date = form.cleaned_data['reservation_date']
+            if reservation_date < datetime.date(datetime.now()).today():  # TODO: Too complicated - simplify
+                text = 'Date from past! Choose available date.'
+                return HttpResponse(text)
+            date_to_check = Reservation.objects.filter(room_id=room_id, reservation_date=reservation_date)
+            if len(date_to_check) > 0:
+                text = 'Conference room unavailable at chosen date!'
+                return HttpResponse(text)
             room_id = form.cleaned_data['room_id']
             reservation_comment = form.cleaned_data['reservation_comment']
             Reservation.objects.create(
