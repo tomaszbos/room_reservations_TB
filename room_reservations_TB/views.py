@@ -99,8 +99,9 @@ class RoomReservation(View):
 
     def get(self, request, room_id):
         room = Room.objects.get(pk=room_id)
+        reservations = Reservation.objects.filter(room_id=room_id)
         context = {"room_id": room.pk, "reservation_date": datetime.now(), 'room': room}
-        return render(request, 'reserve_room.html', {'form': self.form(context)})
+        return render(request, 'reserve_room.html', {'form': self.form(context), 'reservations': reservations})
 
     def post(self, request, room_id):  # TODO: clarify room_id being sent by post method
         data = request.POST
