@@ -67,7 +67,10 @@ class AllRooms(View):
                 <p><a href="/main/">Main menu</a></p>
             '''
             return HttpResponse(text)
+        today_reservations = Reservation.objects.filter(reservation_date=datetime.now())
+        reservations = all_rooms.filter(pk__contains=today_reservations.values('room_id'))
         context['rooms'] = all_rooms
+        context['reservations'] = reservations
         return render(request, 'room_list.html', context)
 
 

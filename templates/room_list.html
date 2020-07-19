@@ -16,6 +16,7 @@
                 <th>Capacity</th>
                 <th>Has projector</th>
                 <th>Description</th>
+                <th>Conference Room available today</th>
             </tr>
             </thead>
             <tbody>
@@ -25,6 +26,11 @@
                     <td>{{ room.room_capacity }}</td>
                     <td>{{ room.room_projector }}</td>
                     <td>{{ room.room_description }}</td>
+                    {% if room in reservations %}
+                        <td>Not Available</td>
+                    {% else %}
+                        <td>Available</td>
+                    {% endif %}
                     <td><a href="{% url 'edit_room' room_id=room.pk %}">Edit Conference Room</a></td>
                     <td><a href="{% url 'delete_room' room_id=room.pk %}">Delete Conference Room</a></td>
                     <td><a href="{% url 'reserve_room' room_id=room.pk %}">Conference Room Reservation</a></td>
