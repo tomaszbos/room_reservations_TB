@@ -2,15 +2,18 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Main Page</title>
+    <title>Conference Room Search</title>
 </head>
 <body>
     <h1>Conference Room Assigment System HMI</h1>
     <h3>You can just call me CRASH!</h3>
+    <form action="" method="POST">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <input type="submit" value="Submit">
+    </form>
     <h2>Navigation menu</h2>
-    <p><a href="{% url 'new_room'%}">Add a conference room</a></p>
-    <p><a href="{% url 'all_rooms'%}">All available conference rooms</a></p>
-    <p><a href="{% url 'search_rooms'%}">Search for a conference room</a></p>
+    <p><a href="{% url 'main' %}">Main menu</a></p>
 </body>
 <style>
 .footer {

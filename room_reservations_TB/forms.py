@@ -18,6 +18,7 @@ class NewRoomForm(forms.Form):
         required=False,
         label='Conference Room Projector Available',
     )
+
     room_description = forms.CharField(
         required=False,
         label='Conference Room Description',
@@ -38,4 +39,21 @@ class ReservationForm(forms.Form):
         required=False,
         label='Reservation comment',
         widget=forms.Textarea(attrs={'placeholder': 'Reservation comment'}),
+    )
+
+
+class SearchForm(forms.Form):
+    room_name = forms.CharField(
+        required=False,
+        label='Conference Room Name',
+        widget=forms.TextInput(attrs={'placeholder': 'Conference Room Name'}),
+    )
+    room_capacity = forms.IntegerField(
+        required=True,
+        label='Conference Room Capacity',
+        initial=0,
+    )
+    room_projector = forms.BooleanField(
+        required=False,
+        label='Conference Room Projector Available',
     )

@@ -1,10 +1,11 @@
 from django.http import HttpResponse
+from django.db.models import Q
 from django.shortcuts import render, redirect
 from django.views.generic import View
 from datetime import datetime
 
 from room_reservations_TB.models import Room, Reservation
-from room_reservations_TB.forms import NewRoomForm, ReservationForm
+from room_reservations_TB.forms import NewRoomForm, ReservationForm, SearchForm
 
 
 def main_page(request):
@@ -176,4 +177,29 @@ class RoomReservation(View):
                 reservation_comment=reservation_comment,
             )
             return redirect('all_rooms')
+        return HttpResponse(text)
+
+
+class RoomSearch(View):
+    form = SearchForm
+
+    def get(self, request):
+        return render(request, 'room_search.html', {'form': self.form()})
+
+    def post(self, request):
+        context = {}
+        data = request.POST
+        form = self.form(data)
+        text = 'Wrong input!'
+        if form.is_valid():
+            room_name = form.cleaned_data['room_name']
+            room_capacity = form.cleaned_data['room_capacity']
+            room_projector = form.cleaned_data['room_projector']
+            searched_rooms = Room.objects.filter(
+                Q(room_name__icontains=room_name),
+                Q(room_capacity__gte=room_capacity),
+                Q(room_projector__exact=room_projector) | Q(room_projector__exact=True),
+            )
+            context['rooms'] = searched_rooms
+            return render(request, 'room_list.html', context)
         return HttpResponse(text)
