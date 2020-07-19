@@ -12,6 +12,26 @@
         {{ form.as_p }}
         <input type="submit" value="Submit">
     </form>
+    <table>
+        <thead>
+            <tr>
+                <th>Reservation Dates</th>
+                <th>Reservation comments</th>
+            </tr>
+        </thead>
+        <tbody>
+            <td>
+                {% for reservation in reservations %}
+                    <p>{{ reservation.reservation_date }}</p>
+                {% endfor %}
+            </td>
+            <td>
+                {% for reservation in reservations %}
+                    <p>{{ reservation.reservation_comment }}</p>
+                {% endfor %}
+            </td>
+        </tbody>
+    </table>
     <h2>Navigation menu</h2>
     <p><a href="{% url 'main' %}">Main menu</a></p>
 </body>
