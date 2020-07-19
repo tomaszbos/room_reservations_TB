@@ -55,7 +55,6 @@ class RoomEdit(View):
     form = NewRoomForm
 
     def get(self, request, room_id):
-        # form = NewRoomForm(instance=Room.objects.get(pk=room_id))
         room = Room.objects.get(pk=room_id)
         context = {"room_name": room.room_name, "room_capacity": room.room_capacity,
                    "room_projector": room.room_projector, "room_description": room.room_description, 'room': room}
@@ -78,3 +77,9 @@ class RoomEdit(View):
             )
             return redirect('all_rooms')
         return HttpResponse(text)
+
+
+class RoomDelete(View):
+    def get(self, request, room_id):
+        Room.objects.filter(pk=room_id).delete()
+        return redirect('all_rooms')
