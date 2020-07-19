@@ -16,3 +16,8 @@ class NewRoomForm(forms.Form):
         required=False,
         label='Conference Room Projector Available',
     )
+    room_description = forms.CharField(
+        required=False,
+        label='Conference Room Description',
+        widget=forms.Textarea(attrs={'placeholder': 'Conference Room Description'}),
+    )

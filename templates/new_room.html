@@ -13,6 +13,20 @@
         <input type="submit" value="Submit">
     </form>
     <h2>Navigation menu</h2>
-    <p><a href="/main">Main menu</a></p>
+    <p><a href="{% url 'main' %}">Main menu</a></p>
 </body>
+<style>
+.footer {
+  position: fixed;
+  left: 0;
+  bottom: 0;
+  width: 100%;
+  background-color: navy;
+  color: deepskyblue;
+  text-align: center;
+}
+</style>
+<div class="footer">
+  <p>Author: Tomasz Boś</p>
+</div>
 </html>
