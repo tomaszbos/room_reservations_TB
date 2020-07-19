@@ -1,9 +1,10 @@
 from django.http import HttpResponse
 from django.shortcuts import render, redirect
 from django.views.generic import View
+from datetime import datetime
 
-from room_reservations_TB.models import Room
-from room_reservations_TB.forms import NewRoomForm
+from room_reservations_TB.models import Room, Reservation
+from room_reservations_TB.forms import NewRoomForm, ReservationForm
 
 
 def main_page(request):
@@ -83,3 +84,28 @@ class RoomDelete(View):
     def get(self, request, room_id):
         Room.objects.filter(pk=room_id).delete()
         return redirect('all_rooms')
+
+
+class RoomReservation(View):
+    form = ReservationForm
+
+    def get(self, request, room_id):
+        room = Room.objects.get(pk=room_id)
+        context = {"room_id": room.pk, "reservation_date": datetime.now(), 'room': room}
+        return render(request, 'reserve_room.html', {'form': self.form(context)})
+
+    def post(self, request, **kwargs):
+        data = request.POST
+        form = self.form(data)
+        text = 'Wrong input!'
+        if form.is_valid():
+            reservation_date = form.cleaned_data['reservation_date']
+            room_id = form.cleaned_data['room_id']
+            reservation_comment = form.cleaned_data['reservation_comment']
+            Reservation.objects.create(
+                reservation_date=reservation_date,
+                room_id=room_id,
+                reservation_comment=reservation_comment,
+            )
+            return redirect('all_rooms')
+        return HttpResponse(text)

@@ -25,6 +25,9 @@
                     <td>{{ room.room_capacity }}</td>
                     <td>{{ room.room_projector }}</td>
                     <td>{{ room.room_description }}</td>
+                    <td><a href="{% url 'edit_room' room_id=room.pk %}">Edit Conference Room</a></td>
+                    <td><a href="{% url 'delete_room' room_id=room.pk %}">Delete Conference Room</a></td>
+                    <td><a href="{% url 'reserve_room' room_id=room.pk %}">Conference Room Reservation</a></td>
                 </tr>
             {% endfor %}
             </tbody>

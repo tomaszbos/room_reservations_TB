@@ -8,4 +8,10 @@ class Room(models.Model):
     room_description = models.TextField(blank=True)
 
     def __str__(self):
-        return self.room_name, self.room_capacity, self.room_projector
+        return self.room_name
+
+
+class Reservation(models.Model):
+    reservation_date = models.DateField()
+    room_id = models.ForeignKey(Room, on_delete=models.CASCADE)
+    reservation_comment = models.TextField(blank=True)
