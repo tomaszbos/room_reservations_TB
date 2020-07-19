@@ -23,6 +23,7 @@ urlpatterns = [
     path('room/new/', views.NewRoom.as_view(), name='new_room'),
     path('room/', views.AllRooms.as_view(), name='all_rooms'),
     path('room/<int:room_id>/', views.RoomDetails.as_view(), name=f'room'),
-    path('room/edit/<int:room_id>/', views.RoomEdit.as_view(), name=f'edit_room'),
+    path('room/modify/<int:room_id>/', views.RoomEdit.as_view(), name=f'edit_room'),
     path('room/delete/<int:room_id>/', views.RoomDelete.as_view(), name=f'delete_room'),
+    path('room/reserve/<int:room_id>/', views.RoomReservation.as_view(), name=f'reserve_room'),
 ]
