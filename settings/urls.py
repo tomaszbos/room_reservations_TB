@@ -19,7 +19,9 @@ from room_reservations_TB import views
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('main/', views.main_page),
+    path('main/', views.main_page, name='main'),
     path('room/new/', views.NewRoom.as_view(), name='new_room'),
     path('room/', views.AllRooms.as_view(), name='all_rooms'),
+    path('room/<int:room_id>/', views.RoomDetails.as_view(), name=f'room'),
+    path('room/edit/<int:room_id>/', views.RoomEdit.as_view(), name=f'edit_room'),
 ]

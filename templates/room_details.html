@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Room list</title>
+    <title>Room details</title>
 </head>
 <body>
     <h1>Conference Room Assigment System HMI</h1>
@@ -19,19 +19,19 @@
             </tr>
             </thead>
             <tbody>
-            {% for room in rooms %}
                 <tr>
-                    <td><a href="{% url 'room' room_id=room.pk %}">{{ room.room_name }}</a></td>
+                    <td>{{ room.room_name }}</td>
                     <td>{{ room.room_capacity }}</td>
                     <td>{{ room.room_projector }}</td>
                     <td>{{ room.room_description }}</td>
+                    <td><a href="{% url 'edit_room' room_id=room.pk %}">Edit Conference Room</a></td>
                 </tr>
-            {% endfor %}
             </tbody>
         </table>
     </form>
     <h2>Navigation menu</h2>
     <p><a href="{% url 'main' %}">Main menu</a></p>
+    <p><a href="{% url 'all_rooms'%}">All available conference rooms</a></p>
 </body>
 <style>
 .footer {
