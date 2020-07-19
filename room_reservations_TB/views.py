@@ -40,6 +40,12 @@ class AllRooms(View):
     def get(self, request):
         context = {}
         all_rooms = Room.objects.all()
+        if len(all_rooms) < 1:
+            text = '''
+                No conference rooms available!
+                <p><a href="/main/">Main menu</a></p>
+            '''
+            return HttpResponse(text)
         context['rooms'] = all_rooms
         return render(request, 'room_list.html', context)
 
@@ -48,7 +54,9 @@ class RoomDetails(View):
     def get(self, request, room_id):
         context = {}
         room = Room.objects.get(pk=room_id)
+        reservations = Reservation.objects.filter(room_id=room_id, reservation_date__gte=datetime.now())
         context['room'] = room
+        context['reservations'] = reservations
         return render(request, 'room_details.html', context)
 
 
@@ -94,7 +102,7 @@ class RoomReservation(View):
         context = {"room_id": room.pk, "reservation_date": datetime.now(), 'room': room}
         return render(request, 'reserve_room.html', {'form': self.form(context)})
 
-    def post(self, request, **kwargs):
+    def post(self, request, room_id):
         data = request.POST
         form = self.form(data)
         text = 'Wrong input!'

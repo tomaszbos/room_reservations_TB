@@ -15,3 +15,6 @@ class Reservation(models.Model):
     reservation_date = models.DateField()
     room_id = models.ForeignKey(Room, on_delete=models.CASCADE)
     reservation_comment = models.TextField(blank=True)
+
+    def __str__(self):
+        return str(self.reservation_date)
