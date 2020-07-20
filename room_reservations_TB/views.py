@@ -49,7 +49,7 @@ class NewRoom(View):
             room_projector = form.cleaned_data['room_projector']
             room_description = form.cleaned_data['room_description']
             Room.objects.create(
-                room_name=room_name,
+                room_name=room_name,  # TODO: Unpacking
                 room_capacity=room_capacity,
                 room_projector=room_projector,
                 room_description=room_description,
@@ -209,3 +209,6 @@ class RoomSearch(View):
                 return HttpResponse(text)
             return render(request, 'room_list.html', context)
         return HttpResponse(text)
+
+# def post(self, request, *args, **kwargs): TODO: check possibilities with kwargs
+#     form(data={**request.POST, **kwargs})

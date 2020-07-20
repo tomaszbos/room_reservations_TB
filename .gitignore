@@ -1,4 +1,5 @@
 
 settings/__pycache__/
-
+.idea/
 *.pyc
+db.sqlite3
