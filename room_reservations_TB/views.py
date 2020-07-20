@@ -31,7 +31,7 @@ class NewRoom(View):
                     '''
                 return HttpResponse(text)
             name_to_check = Room.objects.filter(room_name=room_name)
-            if len(name_to_check) > 0:
+            if name_to_check:
                 text = '''
                         Conference room name already exists!
                         Choose another name!
@@ -62,7 +62,7 @@ class AllRooms(View):
     def get(self, request):
         context = {}
         all_rooms = Room.objects.all()
-        if len(all_rooms) < 1:
+        if not all_rooms:
             text = '''
                 No conference rooms available!
                 <p><a href="/main/">Main menu</a></p>
@@ -107,7 +107,7 @@ class RoomEdit(View):
                     '''
                 return HttpResponse(text)
             name_to_check = Room.objects.filter(room_name=room_name).exclude(pk=room_id)
-            if len(name_to_check) > 0:
+            if name_to_check:
                 text = '''
                         Conference room name already exists!
                         Choose another name!
@@ -162,7 +162,7 @@ class RoomReservation(View):
             '''
                 return HttpResponse(text)
             date_to_check = Reservation.objects.filter(room_id=room_id, reservation_date=reservation_date)
-            if len(date_to_check) > 0:
+            if date_to_check:
                 text = '''
                 Conference room is unavailable at selected date!
                 Choose another date.
@@ -201,5 +201,11 @@ class RoomSearch(View):
                 Q(room_projector__exact=room_projector) | Q(room_projector__exact=True),
             )
             context['rooms'] = searched_rooms
+            if searched_rooms:
+                text = '''
+                No conference rooms meeting your criteria!
+                <p><a href="/main/">Main menu</a></p>
+            '''
+                return HttpResponse(text)
             return render(request, 'room_list.html', context)
         return HttpResponse(text)
