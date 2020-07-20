@@ -21,3 +21,7 @@ class Reservation(models.Model):
 
     def __str__(self):
         return str(self.reservation_date)
+
+# desccryptor klasowy # TODO: check
+# meta klasy
+# admin.py TODO: learn admin functionalioty
