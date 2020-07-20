@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>CRASH</title>
+    <title>CRASH - room search</title>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
           integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
     <link rel="canonical" href="https://getbootstrap.com/docs/4.0/examples/sticky-footer/">
@@ -45,22 +45,29 @@
     <div class="navbar navbar-dark bg-dark titles">
         <h3>Conference Room Assigment System HMI - CRASH</h3><br>
     </div>
-<!-- Nav -->
-<nav class="navbar navbar-expand-lg navbar navbar-dark bg-dark">
-  <a class="navbar-brand" href="#">System rezerwacji sal</a>
-  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
-    <span class="navbar-toggler-icon"></span>
-  </button>
-  <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
-    <div class="navbar-nav">
-      <a class="nav-item nav-link active" href="{% url 'all_rooms' %}">All conference rooms<span class="sr-only">(current)</span></a>
-      <a class="nav-item nav-link" href="{% url 'new_room' %}">Add a conference room</a>
-      <a class="nav-item nav-link" href="{% url 'search_rooms' %}">Search for a conference room</a>
-      <a class="nav-item nav-link" href="{% url 'main' %}">Main menu</a>
-    </div>
-  </div>
-</nav>
-<!-- Nav -->
+    <!-- Nav -->
+    <nav class="navbar navbar-expand-lg navbar navbar-dark bg-dark">
+      <a class="navbar-brand" href="#">System rezerwacji sal</a>
+      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+        <div class="navbar-nav">
+          <a class="nav-item nav-link active" href="{% url 'all_rooms' %}">All conference rooms<span class="sr-only">(current)</span></a>
+          <a class="nav-item nav-link" href="{% url 'new_room' %}">Add a conference room</a>
+          <a class="nav-item nav-link" href="{% url 'search_rooms' %}">Search for a conference room</a>
+          <a class="nav-item nav-link" href="{% url 'main' %}">Main menu</a>
+        </div>
+      </div>
+    </nav>
+    <!-- Nav -->
+    <!-- Form -->
+    <form action="" method="POST">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <button type="submit" class="btn btn-primary">Search</button>
+    </form>
+    <!-- Form -->
 </body>
 <!-- Footer -->
 <footer class="footer">
