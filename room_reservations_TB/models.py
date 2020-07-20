@@ -16,5 +16,8 @@ class Reservation(models.Model):
     room_id = models.ForeignKey(Room, on_delete=models.CASCADE)
     reservation_comment = models.TextField(blank=True)
 
+    class Meta:  # TODO: How Meta works?
+        unique_together = ('room_id', 'reservation_date')
+
     def __str__(self):
         return str(self.reservation_date)
