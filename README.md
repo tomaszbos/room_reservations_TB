@@ -2,4 +2,14 @@
 
 Super simple and light app for managing room reservations.
 
-v0.1
+##### Functionalities:
+* Conference Room management:
+    * Adding a room
+    * editing a room
+    * deleting a room
+* Create reservations
+* List of all available rooms with description:
+    * name
+    * capacity
+    * projector availability
+* Searching for a suitable conference room
